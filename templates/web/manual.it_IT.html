@@ -1,0 +1,50 @@
+{{{template.web.widget.header head.title="Tire-Bouchon" }}}
+{{{!requirejs widgets.fullheight.enable="1"}}}
+<br/><br/>
+
+		<div class="section jumbotron jumbotron-ad red" id="section-2">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 text-justify">
+<pre>
+---	modules/NewBlock.php
+	
+	class WidgetNewBlock {
+		
+		public $result = array();
+		
+		public function WidgetDocs( ){
+			return $result;
+		}
+	  
+	}
+	
+... And then in the Template...
+{ {#NewBlock} }
+	{ {yourValue} }
+	{ {your.deep.value} }
+{ {/NewBlock} }
+</pre>
+					</div>
+					<div class="col-md-6 text-center">
+						<h2>How to create a Block for the template</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="section jumbotron jumbotron-ad yellow" id="section-2">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 text-center">
+						<h2>Splitted enviroment for Front-End and Back-End</h2>
+						<i class="fa fa-adjust fa-5x"></i>
+					</div>
+					<div class="col-md-6 text-justify">
+						Made for Scalability.
+						The core of Tire-Bouchon is thinked to split the two enviroment.
+					</div>
+				</div>
+			</div>
+		</div>
+{{{template.web.widget.footer}}}

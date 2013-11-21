@@ -1,0 +1,86 @@
+{{{template.doc.widget.header head.title="Tire-Bouchon" head.url="http://www.ideabile.com/tirebouchon/" }}}
+      <!-- Example row of columns -->
+      <link href="../js/vendor/codemirror/lib/codemirror.css" rel="stylesheet" />
+	  <link rel="stylesheet" href="../js/vendor/codemirror/theme/solarized.css">
+	  <style>
+	  
+	  	body{
+	  		background: #fdf6e3;
+	  	}
+			#comments{
+				position: absolute;
+/*				background: #333;*/
+				opacity: 0.8;
+				color: #FFF;
+				right: 0;
+				top: 50px;
+				width:  50%;
+				font-family: monospace;
+				font-size: 1em;
+				z-index: 3;
+				padding-top: 40px;
+			}
+			
+			#comments .block{
+				padding: 10px;
+				border: 1px solid #000;
+				opacity: 1;
+				position: relative;
+				margin-top: -10px;
+			}
+			
+			#comments .block{
+				font-size: 0.9em;
+				
+			}
+			
+			#comments .cases{
+				position: absolute;
+				padding: 10px;
+				opacity: 1;
+				line-height: normal;
+				font-size: 1.2em;
+				background: #333;
+			}
+			
+			.directories{
+				position: fixed;
+				z-index: 5;
+				top: 52px;
+				left: -470px;
+				background: #FFF;
+				height: 100%;
+				overflow-y: scroll;
+				overflow-y: hidden;
+				width:500px;
+				transition: all 1s;
+			}
+			
+			.directories:hover{
+				left:0;
+				transition: all 1s;
+			}
+			
+			.directories ul{
+				list-style: none;
+			}
+			
+	  	.CodeMirror{
+	  		position: absolute;
+	  		top: 50px;
+	  		left: 30px;
+			height: auto;
+	  	}
+	  	./*CodeMirror {
+		  border: 1px solid #eee;
+		}*/
+		.CodeMirror-scroll {
+		  overflow-y: hidden;
+		  overflow-x: auto;
+		}
+	  </style>
+      {{#Docs}}
+      	<div id="file-browser" class="directories">{{{dir}}}</div>
+		<textarea id="txt" style="display: none;">{{{file}}}</textarea>
+      {{/Docs}}
+{{{template.web.widget.footer}}}

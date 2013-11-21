@@ -1,0 +1,32 @@
+# Activation
+ msgid "<strong>Complimenti!</strong> L'utente è stato attivato."
+ msgstr "<strong>Complimenti!</strong> L'utente è stato attivato."
+
+ msgid "<strong>Attenzione!</strong> Sei sicuro dell'url che hai consultato?" 
+ msgstr "<strong>Attenzione!</strong> Sei sicuro dell'url che hai consultato?" 
+
+
+ # Login / Registration
+ msgid "Tutti i campi sono richiesti."
+ msgstr "Tutti i campi sono richiesti."
+ 
+ msgid "L'email non è nel formato giusto."
+ msgstr "L'email non è nel formato giusto."
+ 
+ msgid "L'utente inserito è già stato registrato"
+ msgstr "L'utente inserito è già stato registrato"
+ 
+ msgid "L'utente inserito è già stato registrato, ma non è ancora stato attivato. Hai ricevuto l'email?"
+ msgstr "L'utente inserito è già stato registrato, ma non è ancora stato attivato. Hai ricevuto l'email?"
+ 
+ msgid "Welcome to the Maps4You community!"
+ msgstr "Welcome to the Maps4You community!"
+ 
+ msgid "La password è troppo corta."
+ msgstr "La password è troppo corta."
+ 
+ msgid "Tutti i campi sono richiesti."
+ msgstr "Tutti i campi sono richiesti."
+ 
+ msgid "Sei sicuro d'aver inserito i dati corretti?"
+ msgstr "Sei sicuro d'aver inserito i dati corretti?"
