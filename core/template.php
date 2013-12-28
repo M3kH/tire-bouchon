@@ -53,6 +53,7 @@ class Template {
 		
 		$this->_LightnCandy = LightnCandyExt::compile($this->Get($module, $view));
 		$this->_context = LightnCandyExt::getContext();
+		// var_dump($this->_context);
 		$this->_opts = LightnCandyExt::get_opts();
 		// var_dump($this->_context);
 		// echo "\n\n\n\n";
@@ -61,7 +62,7 @@ class Template {
 	public function Render($arr = ''){
 		if( $arr == ''){
 			$cnf = $this->GetConfiguration();
-			// $_SESSION['tmplt']['opt'] = array_merge($_SESSION['tmplt']['opt'], $cnf["options"]);
+			// $_SESSION['tmplt']['opt'] = array_merge_recursive($_SESSION['tmplt']['opt'], $cnf["options"]);
 			$arr = $this->RequireConfig($cnf);
 		}
 
@@ -208,9 +209,9 @@ class Template {
 					$renderer = LightnCandyExt::prepare($template);
 					$context = LightnCandyExt::getContext();
 					$_opts = LightnCandyExt::get_opts();
-					$this->_opts = array_merge($this->_opts, $_opts);
+					$this->_opts = array_merge_recursive($this->_opts, $_opts);
 					// echo "\n\n\n THIS IS Loaded internaly \n\n\n";
-					// var_dump($context);
+					// var_dump($this->_opts);
 					if(key_exists("properties", $context["jsonSchema"])){
 						if(count($opts) == 0 && key_exists("config", $context["jsonSchema"])){
 							$cntx = $this->RequireConfig($context["jsonSchema"]["properties"], array(), $context["jsonSchema"]["config"]);
@@ -220,7 +221,7 @@ class Template {
 						$cnfg = $this->Requirements($cntx, $opts);
 						if(key_exists($_keyConfig, $opts)){
 							// var_dump($cnfg);
-							$cnfg = array_merge($cnfg, $opts[$_keyConfig]);
+							$cnfg = array_merge_recursive($cnfg, $opts[$_keyConfig]);
 							
 						}
 						// var_dump($cnfg);
@@ -304,6 +305,7 @@ class Template {
 		// if(key_exists("opt",$_SESSION["tmplt"]) && key_exists("requirejs",$_SESSION["tmplt"]["opt"])){
 		if(isset($this->_opts) && key_exists("requirejs",$this->_opts)){
 			// foreach ($_SESSION["tmplt"]["opt"]["requirejs"]["widgets"] as $key => $value) {
+				// var_dump($this->_opts["requirejs"]["widgets"] );
 			foreach ($this->_opts["requirejs"]["widgets"] as $key => $value) {
 				if(is_array($value)){
 					$require .= "require(['widget/$key'], function($key){
