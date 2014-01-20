@@ -1,0 +1,64 @@
+{{{template.web.widget.header head.title="Tire-Bouchon" }}}
+		<style>
+		
+			.jumbotron .container{
+				display: table;
+			}
+			.jumbotron .row{
+				display:table-cell;
+				vertical-align:middle;
+			}
+			
+			.container .table{
+				font-size: 0.6em;
+			}
+		</style>
+		{{{bb view.datagrid="#users_list"}}}
+		<div class="section jumbotron jumbotron-ad text-center yellow" id="section-1">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+					{{#Users}}
+						<div id="users_list" data-collection="users">
+								
+							<table class="table table-hover">
+						        <thead>
+						          <tr>
+						            <th>#</th>
+						            <th>Status</th>
+						            <th>First Name</th>
+						            <th>Last Name</th>
+						            <th>Email</th>
+						            <th>Create at</th>
+						          </tr>
+						        </thead>
+						        <tbody>
+									{{#each users}}
+							          <tr class="user-model" data-model="user" data-attributes="{{json_model}}">
+							            <td><input data-prop="id" value="{{user_id}}"></td>
+							            <td><input data-prop="status" value="{{status}}"></td>
+							            <td><input data-prop="first_name" value="{{first_name}}"></td>
+							            <td><input data-prop="last_name" value="{{last_name}}"></td>
+							            <td><input data-prop="email" value="{{email}}"></td>
+							            <td><input data-prop="create_at" value="{{create_at}}"></td>
+							          </tr>
+									{{/each}}
+						        </tbody>
+						      </table>
+								<script type="text/template" id="user-model-template">									
+						            <td><input data-prop="id" value="<%= user_id %>"></td>
+						            <td><input data-prop="status" value="<%= status %>"></td>
+						            <td><input data-prop="first_name" value="<%= first_name %>"></td>
+						            <td><input data-prop="last_name" value="<%= last_name %>"></td>
+						            <td><input data-prop="email" value="<%= email %>"></td>
+						            <td><input data-prop="create_at" value="<%= create_at %>"></td>
+								</script>
+								<button class="btn btn-large btn-default e-add">Add</button>
+						</div>
+						{{{ReactView}}}
+					{{/Users}}
+					</div>
+				</div>
+			</div>
+		</div>
+{{{template.web.widget.footer}}}

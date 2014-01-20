@@ -1,0 +1,46 @@
+{
+    "name": "m3kh/tirebouchon",
+    "version": "0.3",
+    "dist": {
+        "url": "https://github.com/m3kh/tire-bouchon.git",
+        "type": "git"
+    },
+    "config": {
+        "vendor-dir": "core/ext/"
+    },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "lightNCandy",
+                "version": "0.1",
+                "source": {
+                    "url": "https://github.com/zordius/lightncandy.git",
+                    "type": "git",
+                    "reference": "src/"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "epiphany",
+                "version": "0.1",
+                "source": {
+                    "url": "https://github.com/jmathai/epiphany.git",
+                    "type": "git",
+                    "reference": "src/"
+                }
+            }
+        }
+    ],
+    "require": {
+        "epiphany": "0.1",
+        "lightNCandy": "0.1",
+        "phpmailer/phpmailer": "dev-master",
+        "gabordemooij/redbean": "dev-master",
+        "dnode/dnode": "dev-master"
+    },
+    "suggest": {
+    }
+}

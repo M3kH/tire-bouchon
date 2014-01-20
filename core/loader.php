@@ -24,7 +24,7 @@ class Loader {
 
 		if (is_array($arr) && count($arr) > 0) {
 			foreach ($arr as $key => $value) {
-				if ($key != "template" && $key != "require" ) {
+				if ($key != "template" && $key != "require" && $key != "bb" && $key != "backbone" ) {
 					if ($value != "placeholder") {
 						// echo "\n\n\n LOADED: \n";
 						// var_dump($key);
@@ -48,13 +48,13 @@ class Loader {
 	}
 
 	private function IsModule($key = '', $value = '') {
-		// var_dump($value);
+		// var_dump($key);
 		// echo "\n\n";
 		
 		
-		if(file_exists(MAIN.'/modules/'.$key.".php")){
-			$class = "Widget".$key;
-			include_once(MAIN.'/modules/'.$key.".php");
+		if(file_exists(MAIN.'/views/'.$key.".php")){
+			$class = "View".$key;
+			include_once(MAIN.'/views/'.$key.".php");
 			$instance = new $class();
 			return $instance->result;
 		}else{

@@ -1,27 +1,21 @@
 <?php
 
 /**
- * Login and Registration system,
- * and social integration with HybridAuth.
+ * Bootstrapping the system
  *
- * @category   Login / Registration
- * @package    Ideabile Framework
+ * @category   Bootstrap
+ * @package    Tirebouchon
  * @author     Mauro Mandracchia <info@ideabile.com>
  * @copyright  2013 - 2014 Ideabile
  * @license    http://www.opensource.org/licenses/mit-license.html  MIT License
- * @version    Release: 0.1a
+ * @version    Release: 0.2a
  * @link       http://www.ideabile.com
  * @see        -
  * @since      -
  * @deprecated -
  */
 
-// @TODO Add record secret code to the database.
-// @TODO Add sending email when the registration is completed.
-// @TODO Add password field in random generation for security reason.
-// @TODO Limit at 20 times fallied login for each session. And add the Ip and the Web Agent to the yellow list.
-// @TODO If the Ip and the Web Agent try again with other 60 fallied login. Add the Ip to unauthorized client login for 1 hour.
-
+include_once(MAIN."/core/db.php");
 class Bootstrap {
 
 	/**
@@ -35,8 +29,8 @@ class Bootstrap {
 	 */
 	public function Bootstrap( ){
 
-		define('URL', "http://www.ideabile.com/christmas-2013/");
-		define('JS', "/christmas-2013/js/");
+		define('URL', "http://192.168.33.10/");
+		define('JS', "/js/");
 
 		require_once MAIN . '/core/configs/api.php';
 		global $config;
@@ -64,20 +58,21 @@ class Bootstrap {
 
 		if(key_exists("__route__", $_GET)){
 			$_route = $_GET["__route__"];
-			require_once( MAIN.'/ext/epiphany/src/Epi.php' );
-			Epi::setPath('base', MAIN.'/ext/epiphany/src');
+			require_once( MAIN.'/core/ext/epiphany/src/Epi.php' );
+			Epi::setPath('base', MAIN.'/core/ext/epiphany/src');
 			Epi::init('api');
 
 			$start = 5;
 			if($jsonp){ $start = 7; }
 			$route = substr($_route, $start, strlen($_route));
+			$request = strtolower( $_SERVER['REQUEST_METHOD'] );
 
-			if( key_exists($route, $this->_config["api"]["route"]) ){
-				$r = $this->_config["api"]["route"][$route];
+			if( key_exists($route, $this->_config["api"]["route"]) && key_exists($request, $this->_config["api"]["route"][$route]) ){
+				$r = $this->_config["api"]["route"][$route][$request];
 
-				if(key_exists("class", $r) && file_exists(MAIN.'/libs/'.$r["class"].".php")){
+				if(key_exists("class", $r) && file_exists(MAIN.'/models/'.$r["class"].".php")){
 					$class = $r["class"];
-					include(MAIN.'/libs/'.$class.".php");
+					include(MAIN.'/models/'.$class.".php");
 					$instance = new $class();
 					if(key_exists("fnc", $r) AND method_exists($instance, $r["fnc"])){
 							$exc = $r["fnc"];
@@ -91,40 +86,50 @@ class Bootstrap {
 					$exc = FALSE;
 				}
 
-				if(key_exists("method", $r) && $exc){
-
-
-					switch ($r["method"]) {
+				if($exc){
+					switch ($request) {
+						
 						case 'get':
 							getApi()->get( $_route, array($instance, $exc), EpiApi::external );
-
 							break;
+							
 						case 'post':
 							getApi()->post(	$_route, array($instance, $exc), EpiApi::external );
-
+							break;
+							
+						case 'put':
+							getApi()->put( $_route, array($instance, $exc), EpiApi::external );
+							break;
+							
+						case 'delete':
+							getApi()->delete( $_route, array($instance, $exc), EpiApi::external );
 							break;
 
 						default:
-
-
+							return FALSE;
 							break;
 					}
 				}elseif(isset($instance)){
-
-
-					switch ($r["method"]) {
+					switch ($request) {
+						
 						case 'get':
-							getApi()->get(	$_route, array($instance), EpiApi::external);
-
+							getApi()->get( $_route, array($instance), EpiApi::external );
 							break;
+							
 						case 'post':
-							getApi()->post(	$_route, array($instance), EpiApi::external);
-
+							getApi()->post(	$_route, array($instance), EpiApi::external );
+							break;
+							
+						case 'put':
+							getApi()->put( $_route, array($instance), EpiApi::external );
+							break;
+							
+						case 'delete':
+							getApi()->delete( $_route, array($instance), EpiApi::external );
 							break;
 
 						default:
-
-
+							return FALSE;
 							break;
 					}
 				}else{

@@ -12,9 +12,14 @@ define(['require'], function (require) {
     "use strict";
  
     var Config = {
-	    baseUrl: '/tirebouchon/js/',
+	    baseUrl: '/js/',
+	    
 	    paths : {
+	    	backbone: 'vendor/backbone',
+	    	underscore: 'vendor/underscore',
+	    	
 	        //create alias to plugins (not needed if plugins are on the baseUrl)
+	        i18n: 'plugins/requirejs/i18n',
 	        async: 'plugins/requirejs/async',
 	        font: 'plugins/requirejs/font',
 	        goog: 'plugins/requirejs/goog',
@@ -28,6 +33,23 @@ define(['require'], function (require) {
 	    // Remove to remove in production
 	    urlArgs: "v=" +  (new Date()).getTime(),
 	    shim: {
+	    	
+	    	'views/test':{
+	    		deps: ["backbone"]
+	    	},
+	    	
+	    	underscore: {
+                    exports: '_'
+            },
+            
+            backbone: {
+                    deps: [
+                            'underscore',
+                            'jquery'
+                    ],
+                    exports: 'Backbone'
+            },
+	    	
 	    	'plugins/bootstrap/bootstrap-affix':{
 		          deps: ["jquery"]
 	    	},
@@ -46,7 +68,7 @@ define(['require'], function (require) {
 	    	'plugins/bootstrap/bootstrap-dropdown':{
 		          deps: ["jquery"]
 	    	},
-	    	'plugins/bootstrap/bootstrap-modal':{
+	    	'plugins/bootstrap/modal':{
 		          deps: ["jquery"]
 	    	},
 	    	'plugins/bootstrap/bootstrap-popover':{
@@ -84,74 +106,7 @@ define(['require'], function (require) {
 	    	
 	    	'plugins/jquery/selectize.min':{
 		          deps: ["jquery"]
-	    	},
-	    	
-	    	
-	    	'views/app/index':{
-		          deps: ["jquery", "plugins/jquery/jquery.mapCustomizator"]
-	    	},
-	    	
-	    	
-	        'plugins/codemirror/mode/xml/xml': {
-	            deps: ['plugins/codemirror/codemirror']
-	        },
-	        'plugins/codemirror/mode/javascript/javascript': {
-	            deps: ['plugins/codemirror/codemirror']
-	        },
-	        'plugins/codemirror/mode/css/css': {
-	            deps: ['plugins/codemirror/codemirror']
-	        },
-	        'plugins/codemirror/mode/htmlmixed/htmlmixed': {
-	            deps: ['plugins/codemirror/codemirror']
-	        },
-	        
-	        'vendor/codemirror/mode/': {
-	            deps: ['vendor/codemirror/lib/codemirror']
-	        },
-	        'vendor/codemirror/mode/php/php': {
-	            deps: ['vendor/codemirror/lib/codemirror']
-	        },
-	        'vendor/codemirror/mode/xml/xml': {
-	            deps: ['vendor/codemirror/lib/codemirror']
-	        },
-	        'vendor/codemirror/mode/css/css': {
-	            deps: ['vendor/codemirror/lib/codemirror']
-	        },
-	        'vendor/codemirror/mode/clike/clike': {
-	            deps: ['vendor/codemirror/lib/codemirror']
-	        },
-	        'vendor/codemirror/mode/htmlmixed/htmlmixed': {
-	            deps: ['vendor/codemirror/lib/codemirror']
-	        },
-	        
-	        
-	        'vendor/codemirror/addon/': {
-	            deps: ['vendor/codemirror/lib/codemirror']
-	        },
-	        'vendor/codemirror/addon/edit/matchbrackets': {
-	            deps: ['vendor/codemirror/lib/codemirror']
-	        },
-	        'vendor/codemirror/addon/selection/active-line': {
-	            deps: ['vendor/codemirror/lib/codemirror']
-	        },
-	        
-	        'plugins/codemirror/addon/comments/comment-wrapper': {
-	            deps: ['plugins/codemirror/codemirror']
-	        },
-	        'plugins/codemirror/addon/hint/html-hint': {
-	            deps: ['plugins/codemirror/codemirror']
-	        },
-	        'plugins/jquery/jquery.nanoscroller.min': {
-	            deps: ['jquery']
-	        },
-	        'view/admin/ide':{
-	        	deps: ['plugins/codemirror/codemirror', 'jquery', 'plugins/codemirror/mode/xml/xml', 'plugins/codemirror/mode/javascript/javascript',
-	        	'plugins/codemirror/mode/css/css', 'plugins/codemirror/mode/htmlmixed/htmlmixed']
-	        },
-	        
-	        'vendor/jquery.ui.widget' : {
-	        	deps: ["jquery"]
-	        }
+	    	}
 	    	
 	    	
 	    }
@@ -170,12 +125,6 @@ define(['require'], function (require) {
 	        // http://addyosmani.com/writing-modular-js/
 	        return window.jQuery 
 	    }
-	)
-	
-	
-	define(
-	    'jquery.ui.widget'
-	    , ['vendor/jquery.ui.widget']
 	)
  
     // As mentioned up top, requireJS needs us to return a value - in this files case, we will return

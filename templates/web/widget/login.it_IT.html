@@ -1,0 +1,72 @@
+{{{bb view.login="#loginModal"}}}
+{{#Login}}
+{{#not_user}}
+	<div id="loginModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+		  	<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3>Registrati o Loggati</h3>
+			</div>
+			<div class="modal-body">
+				<form id="form-login" class="form-horizontal">
+				   		
+				   		<div class="form-group">
+						    <label class="control-label col-sm-2" for="inputEmail">Email</label>
+						    <div class="col-sm-10">
+						    	<input type="text" class="form-control text-center"  id="login" name="login" placeholder="Email">
+						    </div>
+					    </div>
+					    
+					    <div class="form-group">
+						    <label class="control-label col-sm-2" for="inputPassword">Password</label>
+						    <div class="col-sm-10">
+						    	<input type="password" class="form-control text-center" id="password" name="{{md5}}" placeholder="Password">
+						    </div>
+					    </div>
+				   		
+				   		<div class="form-group registration ">
+				   			
+						    <label class="control-label col-sm-2" for="first_name">Nome</label>
+						    <div class="col-sm-10">
+						    	<input type="text" class="form-control text-center"  id="first_name" name="first_name" placeholder="Nome">
+						    </div>
+						    
+			   			</div>
+				   			
+				   		<div class="form-group registration">
+				   			
+						    <label class="control-label col-sm-2" for="last_name">Cognome</label>
+						    <div class="col-sm-10">
+						    	<input type="text" class="form-control text-center"  id="last_name" name="last_name" placeholder="Cognome">
+						    </div>
+						    
+				   		</div>
+				   		
+		   			<div class="text-center">
+						<div class="btn-group">
+							<a href="#" class="btn btn-large btn-primary e-login">Login</a>
+							<a href="#" class="btn btn-large btn-success e-sigup">Registrati</a>
+						</div>
+					</div>
+			   </form>
+			   
+			    	<p class="text-center"><b><i>....Oppure...</i></b></p>
+		   		
+		   		<div class="text-center">
+					<div class="btn-group">
+						<a href="api/user/social/?sociaLogin=facebook" class="btn-small btn btn-primary">Facebook</a>
+						<a href="api/user/social/?sociaLogin=google" class="btn-small btn btn-danger">G+</a>
+						<a href="api/user/social/?sociaLogin=twitter" class="btn-small btn btn-primary">Twitter</a>
+					</div>
+				</div>
+		  </div>
+			<div class="modal-footer">
+				<a href="#" class="btn">Close</a>
+				<a href="#" class="btn btn-primary">Login with social!</a>
+			</div>
+			</div>
+		</div>
+	</div>
+{{/not_user}}
+{{/Login}}

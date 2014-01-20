@@ -1,0 +1,14 @@
+{
+  "name": "frontRender",
+  "version": "0.0.0",
+  "description": "Just a small render for dNode functions",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "amdefine": ">=0.1.0"
+  },
+  "author": "Mauro Mandracchia",
+  "license": "MIT"
+}

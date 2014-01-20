@@ -22,7 +22,7 @@
 // @TODO Limit at 20 times fallied login for each session. And add the Ip and the Web Agent to the yellow list.
 // @TODO If the Ip and the Web Agent try again with other 60 fallied login. Add the Ip to unauthorized client login for 1 hour.
 
-require(MAIN.'/ext/lightncandy.ext.inc');
+require(MAIN.'/core/ext/lightncandy.ext.inc');
 
 class Template {
 	
@@ -140,6 +140,10 @@ class Template {
 				}elseif(is_array($cnf[$key]["type"])){
 					
 					switch ($module) {
+						case 'backbone':
+							$arr['backbone'] = $this->Backbone();
+							break;
+							
 						case 'require':
 							$arr['require'] = $this->RequireJS($this->module);
 							break;
@@ -169,6 +173,9 @@ class Template {
 				// echo "\n\n\n\n";
 				
 			// $_SESSION['tmplt']['opt'] = array_merge_recursive($_SESSION['tmplt']['opt'],$opts);
+			// $this->_opts = array_merge_recursive($this->_opts, $opts);
+			// var_dump($this->_opts);
+			
 		return $arr;
 	}
 
@@ -278,7 +285,47 @@ class Template {
 		$result = $this->template_variables;
 		return $result;
 	}
+	
+	/**
+	 * This would be the function for create the Backbone View including
+	 */
+	 
+	 private function Backbone(){
+		
+	 	if(isset($this->_opts) && key_exists("bb",$this->_opts)){
+	 		// var_dump($this->_opts["bb"]["view"]);
+			
+			foreach ($this->_opts["bb"]["view"] as $key => $value) {
+				if(is_array($value)){
+					$widgets[] = array("name" => $key, "file" => $key);
+				}else{
+					$widgets[] = array("name" => $value, "file" => $key);
+				}
+			}
+		}
+		
+		$base = JS;
+		$widgets = json_encode($widgets);
+		if($this->view != "web"){$path="../";}else{$path="";} 
+		
+		$html = "
+		<script data-main=\"".$path."js/main\"  src=\"".$path."js/require.js\"></script>
+		<script>
+		define('global', {
+			widgets: $widgets,
+			baseUrl: '$base',
+			init: function(){
+			}
+		});
+		</script>
+		";
+		return $html;
+		
+	 }
 
+	/**
+	 * This is the function for create the RequireJS 
+	 */
 	private function RequireJS($module = '', $action = '') {
 	
 		$js_module = 'index';

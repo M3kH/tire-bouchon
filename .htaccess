@@ -1,0 +1,42 @@
+
+
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)\?*$ index.php?__route__=/$1 [L,QSA]
+
+
+# proc/self/environ? no!
+RewriteCond %{QUERY_STRING} proc/self/environ [OR]
+
+#Blocca ogni script che cerca di settare un valore mosConfig attraverso l'URL
+RewriteCond %{QUERY_STRING} mosConfig_[a-zA-Z_]{1,21}(=|\%3D) [OR]
+
+# Blocca ogni script base64_encode crap
+RewriteCond %{QUERY_STRING} base64_encode.*(.*) [OR]
+
+#Blocca ogni script che contiene un tag <script> nell'URL
+RewriteCond %{QUERY_STRING} (<|%3C).*script.*(>|%3E) [NC,OR]
+
+# Blocca ogni script che cerca di settare una variabile globale PHP via URL
+RewriteCond %{QUERY_STRING} GLOBALS(=|[|\%[0-9A-Z]{0,2}) [OR]
+
+# Blocca ogni script che cerca di modificare una variabile a _REQUEST via URL
+RewriteCond %{QUERY_STRING} _REQUEST(=|[|\%[0-9A-Z]{0,2})
+
+# Invia tutte le richieste bloccate alla pagina di errore 403!
+RewriteRule ^(.*)$ index.php [F,L]
+
+# proteggi le cartelle disabilitando l'esecuzione di script
+#AddHandler cgi-script .php .pl .py .jsp .asp .htm .shtml .sh .cgi
+#Options -ExecCGI
