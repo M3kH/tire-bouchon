@@ -7,7 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "amdefine": ">=0.1.0"
+    "amdefine": ">=0.1.0",
+    "backbone": "*",
+    "requirejs": "*",
+	"react" : "*",
+	"dnode" : "*",
+	"forever-monitor": "*"    
   },
   "author": "Mauro Mandracchia",
   "license": "MIT"

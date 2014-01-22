@@ -32,6 +32,7 @@ class ViewUsers extends BaseView{
 			include_once(MAIN."/models/Users.php");
 			$user = new Users();
 			$this->result["users"] = $this->getJsonModel($user->GetAll());
+			$this->result["json_model"] = json_encode($user->GetAll());
 			$this->result["ReactView"] = $this->renderComponetNode( "ReactView", $user->GetAll());
 		}
 		// var_dump($this->result);

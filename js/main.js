@@ -1,5 +1,4 @@
 require(['global', './common'], function(global, common) {
-	
 		common.baseUrl = global.baseUrl; 
 		var widgets = [];
 		/*
@@ -20,24 +19,51 @@ require(['global', './common'], function(global, common) {
 		 */
 		
 		require(common, widgets, function(){
+	
+		var $ = require("jquery");
+		var React = require(["vendor/react"]);
+		// var ReactMount = require(['vendor/ReactMount']);
+		
 			var views = [];
 			for( var k in global.widgets ){
 				var elem = global.widgets[k],
 					vl = views.length,
 					name = elem["name"],
 					file = elem["file"],
-					instance = capitalize(file)+'View',
-					view = require(widgets[k]);
-				
-				
-				if(name === file){
-					views[vl] = new view({});
-					views[vl].initialize();
-				}else{
-					views[vl] = new view({el:name});
-					console.log(views[vl]);
-					views[vl].initialize();
-				}
+					instance = capitalize(file)+'View';
+					
+				var scheme = $(document).find(name).data("json");
+					
+					require(common, [widgets[k]], function( Component ){
+						React.renderComponent( Component(scheme), document.getElementById(name));
+					});
+					// view = require(widgets[k]);
+// 					
+				// // var ReactView = require(widgets[k]);
+// 				
+// 				
+				// if(name === file){
+					// views[vl] = new view({});
+					// views[vl].initialize();
+				// }else if( typeof view != "undefined" ){
+					// console.log(view instanceof React);
+					// // console.log(view instanceof Backbone);
+					// var scheme = $(document).find(name).data("json");
+					// views[vl] = new view(scheme);
+					// console.log(typeof views[vl].initialize);
+					// if(typeof views[vl].initialize == "undefined"){
+						// // var comp = views[vl];
+						// // console.log(views);
+						// // var ReactView = require([widgets[k]]);
+						// // ReactView = ReactView(null);
+						// // new view();
+						// // console.log(view( ));
+						// console.log(scheme);
+						// React.renderComponent( views[vl], document.getElementById(name));
+					// }else{
+						// views[vl].initialize();
+					// }
+				// }
 			}
 		});
 });

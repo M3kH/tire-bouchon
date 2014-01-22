@@ -17,6 +17,9 @@ define(['require'], function (require) {
 	    paths : {
 	    	backbone: 'vendor/backbone',
 	    	underscore: 'vendor/underscore',
+	    	react: 'vendor/react',
+	    	ReactMount: 'vendor/ReactMount',
+        	JSXTransformer: 'vendor/jsx-traformer',
 	    	
 	        //create alias to plugins (not needed if plugins are on the baseUrl)
 	        i18n: 'plugins/requirejs/i18n',
@@ -27,6 +30,7 @@ define(['require'], function (require) {
 	        json: 'plugins/requirejs/json',
 	        noext: 'plugins/requirejs/noext',
 	        mdown: 'plugins/requirejs/mdown',
+	        jsx: "plugins/requirejs/jsx",
 	        propertyParser : 'plugins/requirejs/propertyParser',
 	        markdownConverter : 'plugins/requirejs/Markdown.Converter'
 	    },

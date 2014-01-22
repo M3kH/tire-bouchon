@@ -306,7 +306,27 @@ class Template {
 		
 		$base = JS;
 		$widgets = json_encode($widgets);
-		if($this->view != "web"){$path="../";}else{$path="";} 
+		if($this->view != "web"){$path="../";}else{$path="";}
+		
+		// <script src=\"".$path."js/require.js\"></script>
+		// <script>
+		// define('global', {
+			// widgets: $widgets,
+			// baseUrl: '$base',
+			// init: function(){
+			// }
+		// });
+		// require.config({
+			// paths: {		
+		    	// react: 'vendor/react',
+    	    	// JSXTransformer: 'vendor/jsx-traformer'
+			// },
+			// baseUrl: '$base',
+		    // urlArgs: 'v=' +  (new Date()).getTime()
+		// });
+		// var config = require(['common']);
+		// require(config, ['main']);
+		// </script> 
 		
 		$html = "
 		<script data-main=\"".$path."js/main\"  src=\"".$path."js/require.js\"></script>
@@ -314,6 +334,7 @@ class Template {
 		define('global', {
 			widgets: $widgets,
 			baseUrl: '$base',
+		    urlArgs: 'v=' +  (new Date()).getTime(),
 			init: function(){
 			}
 		});

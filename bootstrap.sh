@@ -1,2 +1,6 @@
 #!/bin/bash
-cd /vagrant/core/frontRender/ && forever start /vagrant/core/frontRender/app.js
+
+composer install --prefer-source
+npm install -g forever
+cd /vagrant/core/frontRender/ && npm install
+

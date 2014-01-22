@@ -13,7 +13,7 @@
 				font-size: 0.6em;
 			}
 		</style>
-		{{{bb view.datagrid="#users_list"}}}
+		{{{!bb view.datagrid="#users_list"}}}
 		<div class="section jumbotron jumbotron-ad text-center yellow" id="section-1">
 			<div class="container">
 				<div class="row">
@@ -55,7 +55,11 @@
 								</script>
 								<button class="btn btn-large btn-default e-add">Add</button>
 						</div>
+						<div id="reactview" data-json="{{json_model}}">
+							
 						{{{ReactView}}}
+						</div>
+						{{{bb view.ReactView="#reactview"}}}
 					{{/Users}}
 					</div>
 				</div>
